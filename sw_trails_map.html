@@ -44,8 +44,8 @@
 			//Put two hike and bike layers into a single layer group
 			var hike_and_bike = L.layerGroup([hnb_base, hnb_hillshade]);
 
-			var open_cycle_map = L.tileLayer('http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png' {
-				attribution: '(c) OpenStreetMap contributors. Tiles courtesy of Andy Allan',
+			var open_cycle_map = L.tileLayer('http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png', {
+				attribution: 'Data (c) OpenStreetMap contributors. Tiles courtesy of Andy Allan',
 				maxZoom: 18
 			});
 
