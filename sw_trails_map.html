@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css" />
+		<script src="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.js"></script>
+		<style type="text/css"> #map { height: 775px; } </style>
+	</head>
+	<body>
+		<div id="map"></div>
+		<script>
+			var map = L.map('map', {
+				center: [45.475422, -122.7014005],
+				zoom: 13,
+				// Limit the bounds of the map such that one can't exit the SW Trails Area
+				maxBounds: new L.latLngBounds([45.5177, -122.763594], [45.433144, -122.639207])
+			});
+
+			L.tileLayer('http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.jpg', {
+				attribution: 'Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under CC BY SA',
+				maxZoom: 18
+			}).addTo(map);
+		</script>
+	</body>
+</html>
