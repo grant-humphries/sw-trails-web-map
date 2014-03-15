@@ -2,8 +2,8 @@
 <html>
 	<head>
 		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css" />
-		<script src="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.js"></script>
-		<style type="text/css"> #map { height: 775px; } </style>
+		<script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+		<style type="text/css"> #map { height: 1500px; } </style>
 	</head>
 	<body>
 		<div id="map"></div>
@@ -11,14 +11,53 @@
 			var map = L.map('map', {
 				center: [45.475422, -122.7014005],
 				zoom: 13,
+				minZoom: 13,
 				// Limit the bounds of the map such that one can't exit the SW Trails Area
 				maxBounds: new L.latLngBounds([45.5177, -122.763594], [45.433144, -122.639207])
 			});
 
-			L.tileLayer('http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.jpg', {
-				attribution: 'Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under CC BY SA',
+			//Bounding box displaying the extent of the SW Trails PDX area
+			var b_box_polygon = L.polygon([
+				[45.5177, -122.763594],
+				[45.5177, -122.639207],
+				[45.433144, -122.639207],
+				[45.433144, -122.763594]
+			]).addTo(map);
+
+			//Add various base maps
+			
+			//Stamen Terrain is the default base layer
+			var stamen_terrain = L.tileLayer('http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.jpg', {
+				attribution: 'Map tiles by Stamen Design, under CC BY 3.0. Data (c) OpenStreetMap contributors',
 				maxZoom: 18
 			}).addTo(map);
+
+			var hnb_base = L.tileLayer('http://toolserver.org/tiles/hikebike/{z}/{x}/{y}.png', {
+				attribution: 'Map tiles by Colin Marquardt.  Data (c) OpenStreetMap contributors',
+				maxZoom: 17
+			});
+
+			var hnb_hillshade = L.tileLayer('http://toolserver.org/~cmarqu/hill/{z}/{x}/{y}.png', {
+				maxZoom: 16
+			});
+
+			//Put two hike and bike layers into a single layer group
+			var hike_and_bike = L.layerGroup([hnb_base, hnb_hillshade]);
+
+			var open_cycle_map = L.tileLayer('http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png' {
+				attribution: '(c) OpenStreetMap contributors. Tiles courtesy of Andy Allan',
+				maxZoom: 18
+			});
+
+			var baseMaps = {
+				'Stamen Terrain': stamen_terrain,
+				'Hike & Bike Map': hike_and_bike,
+				'Open Cycle Map': open_cycle_map
+			};
+
+			//Add Layer control
+			L.control.layers(baseMaps).addTo(map);
+
 		</script>
 	</body>
 </html>
