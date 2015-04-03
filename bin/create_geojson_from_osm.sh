@@ -3,7 +3,8 @@
 # get OSM trail data from the overpass api as .osm and convert it to geojson
 # using ogr2ogr
 
-project_dir="/Users/granthumphries/Coding/git/sw-trails-web-map"
+data_dir="/Users/granthumphries/Coding/git/sw-trails-web-map/data"
+mkdir -p $data_dor
 
 # bounding box should be feed to overpass in the following order
 # min-lat,min-lon,max-lat,max-lon (or S,W,N,E)
@@ -13,8 +14,8 @@ min_lon="-122.763594"
 max_lat="45.5177"
 max_lon="-122.639207"
 
-osm_file="${project_dir}/data/sw_trails.osm"
-geojson_file="${project_dir}/data/sw_trails.geojson"
+osm_file="${data_dir}/sw_trails.osm"
+geojson_file="${data_dir}/sw_trails.geojson"
 
 getOsmJsonFromOverpass() {
 	overpass_url="http://overpass-api.de/api/interpreter?data="
