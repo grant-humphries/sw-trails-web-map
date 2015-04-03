@@ -13,8 +13,8 @@ min_lon="-122.763594"
 max_lat="45.5177"
 max_lon="-122.639207"
 
-osm_file="${project_dir}/sw_trails.osm"
-geojson_file="${project_dir}/sw_trails.geojson"
+osm_file="${project_dir}/data/sw_trails.osm"
+geojson_file="${project_dir}/data/sw_trails.geojson"
 
 getOsmJsonFromOverpass() {
 	overpass_url="http://overpass-api.de/api/interpreter?data="
@@ -31,6 +31,10 @@ getOsmJsonFromOverpass() {
 }
 
 osmToGeojson() {
+	# delete the geojson file if it already exists
+	echo "m -f $geojson_file"
+	rm -f $geojson_file
+
 	echo "ogr2ogr -f GeoJSON $geojson_file $osm_file lines"
 	ogr2ogr -f GeoJSON $geojson_file $osm_file lines
 }
