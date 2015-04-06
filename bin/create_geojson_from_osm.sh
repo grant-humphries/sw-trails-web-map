@@ -19,7 +19,7 @@ geojson_file="${data_dir}/sw_trails.geojson"
 
 getOsmJsonFromOverpass() {
 	overpass_url="http://overpass-api.de/api/interpreter?data="
-	tags="[highway~\"footway|path|cycleway|pedestrian|steps\"]"
+	tags="[highway~\"footway|path|cycleway|bridleway|pedestrian|steps\"]"
 	bbox="(${min_lat}, ${min_lon}, ${max_lat}, ${max_lon})"
 
 	# docs on overpass query language here:

@@ -41,24 +41,38 @@ var open_cycle_map = L.tileLayer('http://{s}.tile.opencyclemap.org/cycle/{z}/{x}
 var baseMaps = {
 	'Stamen Terrain': stamen_terrain,
 	'Hike & Bike Map': hike_and_bike,
-	'Open Cycle Map': open_cycle_map
+	'Open Cycle Map': open_cycle_map,
+	'No Base Map': L.tileLayer('')
 };
 
-// add Layer control
+// add layer control
 L.control.layers(baseMaps).addTo(map);
 
 
-// bounding box displaying the extent of the SW Trails PDX area
+var test_style = {
+	color: 'green',
+	weight: 2,
+	opacity: 0.5,
+	dashArray: '5, 5'
+};
+
+// add geojson trails
+$.getJSON('sw_trails.geojson', function(data) {
+	L.geoJson(data, {
+		style: test_style
+	}).addTo(map);
+});
+
+// add cutout bounding box displaying the extent of the SW Trails PDX area
 var b_box_polygon = L.polygon([
 	// outer ring (covers planet)
-	[[90, -180], [90, 180], [-90, 180], [-90, -180]],
+	[[90, -180], [90, 180], [-90, 180], [-90, -180]], [
 	// inner ring (sw trails area)
-	[[max_lat, min_lon], [max_lat, max_lon],
-	[min_lat, max_lon], [min_lat, min_lon]]], 
+	[max_lat, min_lon],	[max_lat, max_lon],
+	[min_lat, max_lon], [min_lat, min_lon]]], {
 	// polygon style
-	{color: 'white',
+	color: 'white',
 	opacity: 0.9,
 	fillColor: 'white',
 	fillOpacity: 0.8}
-	).addTo(map);
-
+).addTo(map);
