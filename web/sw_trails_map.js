@@ -49,17 +49,31 @@ var baseMaps = {
 L.control.layers(baseMaps).addTo(map);
 
 
-var test_style = {
-	color: 'green',
-	weight: 2,
-	opacity: 0.5,
-	dashArray: '5, 5'
+var trails_style = function(feature) {
+	base_style = {
+		weight: 2,
+		opacity: 0.85,
+		dashArray: '5, 5'
+	};
+
+	switch (feature.properties.highway) {
+		case 'footway': base_style.color = 'red';
+		case 'path': base_style.color = '#39ff14';
+		case 'cycleway': base_style.color = 'blue';
+		case 'pedestrian': base_style.color = 'green';
+		case 'bridleway': base_style.color = 'burlywood';
+		case 'steps': base_style.color = 'crimson';
+	};
+	console.log(base_style)
+	return base_style;
 };
+
+	
 
 // add geojson trails
 $.getJSON('sw_trails.geojson', function(data) {
 	L.geoJson(data, {
-		style: test_style
+		style: trails_style
 	}).addTo(map);
 });
 

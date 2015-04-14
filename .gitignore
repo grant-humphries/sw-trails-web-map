@@ -1,3 +1,8 @@
 *.geojson
 *.json
 *.osm
+*.shp
+*.dbf
+*.prj
+*.shx
+*.zip
