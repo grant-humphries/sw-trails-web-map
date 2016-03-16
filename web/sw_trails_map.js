@@ -53,18 +53,18 @@ var trails_style = function(feature) {
 	base_style = {
 		weight: 2,
 		opacity: 0.85,
-		dashArray: '5, 5'
+		dashArray: '2, 4'
 	};
 
 	switch (feature.properties.highway) {
-		case 'footway': base_style.color = 'red';
-		case 'path': base_style.color = '#39ff14';
-		case 'cycleway': base_style.color = 'blue';
-		case 'pedestrian': base_style.color = 'green';
-		case 'bridleway': base_style.color = 'burlywood';
+		case 'footway': base_style.color = 'red'; break;
+		case 'path': base_style.color = '#39ff14'; break;
+		case 'cycleway': base_style.color = 'blue'; break;
+		case 'pedestrian': base_style.color = 'green'; break;
+		case 'bridleway': base_style.color = 'burlywood'; break;
 		case 'steps': base_style.color = 'crimson';
 	};
-	console.log(base_style)
+	console.log(base_style);
 	return base_style;
 };
 

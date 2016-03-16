@@ -95,3 +95,10 @@ pd_trails_shp="${data_dir}/shp_pd_corridor_trails.shp"
 
 getOsmFileFromOverpass $pd_lat1 $pd_lon1 $pd_lat2 $pd_lon2 $pd_trails_osm;
 osmToOgr "$pd_out_format" $pd_trails_shp $pd_trails_osm;
+
+
+
+
+wget -O test.osm "http://overpass-api.de/api/interpreter?data=relation[operator=\"SW Trails PDX\"](45.433,-122.7635,45.5177,-122.6392);(._;>>;);out body;"
+'4T Trail'
+
